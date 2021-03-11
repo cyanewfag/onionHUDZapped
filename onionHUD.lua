@@ -25,7 +25,7 @@ end
 
 local windows = {{ name = "watermark", rect = Rect(1660, 10, 250, 20), sizable = false }};
 local mouseHandler = { controlX = 0, controlY = 0, controlSelected = false, controlSelectedIndex = 0 };
-local controls = { gui.add_checkbox("Enabled", true), gui.add_checkbox("Override HUD", true), gui.add_dropdown_multi("HUD Features", "Watermark", "Keybinds", "Weapons", "Health", "Spectator's List", "Scoreboard", "Bomb Timer", "Hitlist"), gui.add_colorpicker("Header Color", color.new(200, 103, 245, 255)) };
+local controls = { gui.add_checkbox("Enabled", true), gui.add_checkbox("Override HUD", true), gui.add_dropdown_multi("HUD Features", "Watermark", "Chatbox", "Keybinds", "Weapons", "Health", "Spectator's List", "Scoreboard", "Bomb Timer", "Hitlist"), gui.add_colorpicker("Header Color", color.new(200, 103, 245, 255)) };
 local locationControls = {};
 local locationControlsVisible = true;
 
@@ -91,10 +91,12 @@ end
 
 local function stringContains(str1, str2)
     if (str1 ~= nil and str2 ~= nil) then
-        if (string.find(str1:lower(), str2:lower())) then
-            return true;
-        else
-            return false;
+        if (type(str1) == "string" and type(str2) == "string") then
+            if (string.find(str1:lower(), str2:lower())) then
+                return true;
+            else
+                return false;
+            end
         end
     end
 end
@@ -116,7 +118,6 @@ function drawWatermark()
 end
 
 function on_render()
-    -- Handlers
     scrSize = engine.screen_size();
     mouseVec = keys.get_mouse();
     handleWindows();
