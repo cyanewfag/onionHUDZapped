@@ -25,7 +25,7 @@ end
 
 local windows = {{ name = "watermark", rect = Rect(1660, 10, 250, 20), sizable = false }};
 local mouseHandler = { controlX = 0, controlY = 0, controlSelected = false, controlSelectedIndex = 0 };
-local controls = { gui.add_checkbox("Enabled", true), gui.add_checkbox("Override HUD", true), gui.add_dropdown_multi("HUD Features", "Watermark", "Keybinds", "Weapons", "Health", "Spectator's List", "Scoreboard", "Bomb Timer", "Hitlist") };
+local controls = { gui.add_checkbox("Enabled", true), gui.add_checkbox("Override HUD", true), gui.add_dropdown_multi("HUD Features", "Watermark", "Keybinds", "Weapons", "Health", "Spectator's List", "Scoreboard", "Bomb Timer", "Hitlist"), gui.add_colorpicker("Header Color", color.new(200, 103, 245, 255)) };
 local locationControls = {};
 local locationControlsVisible = true;
 
@@ -103,7 +103,7 @@ function drawWindow(windowName)
     if (windowName ~= nil) then
         local index = handleWindows(windowName);
 
-        renderer.filled_rect(windows[index].rect.x, windows[index].rect.y, windows[index].rect.w, 2, color.new(200, 103, 245, 255));
+        renderer.filled_rect(windows[index].rect.x, windows[index].rect.y, windows[index].rect.w, 2, controls[4]:get_value());
         renderer.filled_rect(windows[index].rect.x, windows[index].rect.y + 2, windows[index].rect.w, windows[index].rect.h - 2, color.new(20, 20, 20, 150));
         return index;
     end
